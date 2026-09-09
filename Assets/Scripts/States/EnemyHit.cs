@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public class EnemyHitState : EnemyState
+public class EnemyHitState : MonoBehaviour
 {
-    public override void EnterState(EnemyStateManager state)
+    private float moveSpeedCoef;
+
+    private void EnterState(EnemyStateManager state)
     {
         moveSpeedCoef = 0.8f;
 
@@ -16,15 +18,15 @@ public class EnemyHitState : EnemyState
 
     }
 
-    public override void OnHealthChanged(EnemyStateManager state, float health)
+    private void OnHealthChanged(EnemyStateManager state, float health)
     {
         if (state.EnemyHealth.HealthPercent <= state.EnemyHealth.InjuredPercent)
         {
-            state.SwitchState(state.InjuredState);
+            
         }
     }
 
-    public override void UpdateState(EnemyStateManager state)
+    private void UpdateState(EnemyStateManager state)
     {
         
     }

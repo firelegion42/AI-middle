@@ -1,9 +1,11 @@
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class EnemyHealthyState : EnemyState
+public class EnemyHealthyState : MonoBehaviour
 {
-    public override void EnterState(EnemyStateManager state)
+    private int moveSpeedCoef;
+
+    private void EnterState(EnemyStateManager state)
     {
         Debug.Log("Entered Healthy");
 
@@ -18,16 +20,16 @@ public class EnemyHealthyState : EnemyState
         Debug.Log("Current patrol target is " + currentzone);
     }
 
-    public override void OnHealthChanged(EnemyStateManager state, float health)
+    private void OnHealthChanged(EnemyStateManager state, float health)
     {
         if (state.EnemyHealth.HealthPercent <= state.EnemyHealth.HitPercent)
         {
-            state.SwitchState(state.HitState);
+            
         }
 
     }
 
-    public override void UpdateState(EnemyStateManager state)
+    private void UpdateState(EnemyStateManager state)
     {
         
     }

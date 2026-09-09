@@ -1,20 +1,22 @@
 using UnityEngine;
 
-public class EnemyInjuredState : EnemyState
+public class EnemyInjuredState : MonoBehaviour
 {
-    public override void EnterState(EnemyStateManager state)
+    private float moveSpeedCoef;
+
+    private void EnterState(EnemyStateManager state)
     {
         moveSpeedCoef = 0.5f;
 
         Debug.Log("EnteredInjured");
     }
 
-    public override void OnHealthChanged(EnemyStateManager state, float health)
+    private void OnHealthChanged(EnemyStateManager state, float health)
     {
         
     }
 
-    public override void UpdateState(EnemyStateManager state)
+    private void UpdateState(EnemyStateManager state)
     {
         
     }
