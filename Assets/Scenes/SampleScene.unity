@@ -619,7 +619,10 @@ GameObject:
   - component: {fileID: 680960528}
   - component: {fileID: 680960527}
   - component: {fileID: 680960533}
+  - component: {fileID: 680960536}
+  - component: {fileID: 680960535}
   - component: {fileID: 680960534}
+  - component: {fileID: 680960537}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -645,9 +648,9 @@ MonoBehaviour:
   healthChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 680960534}
-        m_TargetAssemblyTypeName: EnemyStateManager, Assembly-CSharp
-        m_MethodName: HealthChanged
+      - m_Target: {fileID: 680960537}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: OnHealthChange
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -784,13 +787,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 680960526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebfdec2b5ebc1504a806f5c5750bebf6, type: 3}
+  m_Script: {fileID: 11500000, guid: e444393b9b475d043aca857a3ba8f62a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyStateManager
-  _enemySettings: {fileID: 11400000, guid: 7d25271eac443514b8eb038421c1e712, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyInjuredState
+  _health: {fileID: 680960527}
+  hitThreshold: 0.8
+  injuredThreshold: 0.4
+  moveSpeed: 4
+  agent: {fileID: 680960533}
+  hideTargets:
+  - {fileID: 1949202382}
+--- !u!114 &680960535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680960526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ff858fadff35d45b1f75beaa032338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitState
+  _health: {fileID: 680960527}
+  hitThreshold: 0.8
+  injuredThreshold: 0.4
+  moveSpeed: 4
+  agent: {fileID: 680960533}
   targets:
   - {fileID: 957662015}
   - {fileID: 1790792938}
+--- !u!114 &680960536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680960526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720e7236173f3f149ae2e4843d85fbbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthyState
+  _health: {fileID: 680960527}
+  hitThreshold: 0.8
+  injuredThreshold: 0.4
+  moveSpeed: 4
+  agent: {fileID: 680960533}
+  targets:
+  - {fileID: 957662015}
+  - {fileID: 1790792938}
+--- !u!114 &680960537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680960526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5eb59cdabb96144db6ce9d4bb2c83fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateManager
+  _behaviours:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,7 +1486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949202383}
   m_Layer: 0
-  m_Name: Hide
+  m_Name: HideTarget
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1457,8 +1519,8 @@ SceneRoots:
   - {fileID: 1615027210}
   - {fileID: 680960531}
   - {fileID: 1535143336}
-  - {fileID: 1949202383}
   - {fileID: 1496237566}
   - {fileID: 270908139}
+  - {fileID: 1949202383}
   - {fileID: 957662016}
   - {fileID: 1790792939}

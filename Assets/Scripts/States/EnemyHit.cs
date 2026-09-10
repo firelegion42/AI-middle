@@ -1,44 +1,43 @@
 using UnityEngine;
 
-public class EnemyHitState : MonoBehaviour
+public class EnemyHitState : EnemyState
 {
-    private float moveSpeedCoef;
+    [SerializeField] protected GameObject[] targets;
+    [SerializeField] protected float hitThreshold;
 
-    private void EnterState(EnemyStateManager state)
+    public override float Evaluate()
     {
-        moveSpeedCoef = 0.8f;
-
-        state.Agent.speed = state.EnemySettings.EnemyMovespeed * moveSpeedCoef;
-
-        Debug.Log("Entered Hit state");
-
-        Transform bestTarget = FindClosestTarget(state);
-
-        state.Agent.destination = bestTarget.position;
-
-    }
-
-    private void OnHealthChanged(EnemyStateManager state, float health)
-    {
-        if (state.EnemyHealth.HealthPercent <= state.EnemyHealth.InjuredPercent)
+        if(_health.HealthPercent <= hitThreshold)
         {
-            
+            return 30f;
+        }
+        else
+        {
+            return 0f;
         }
     }
 
-    private void UpdateState(EnemyStateManager state)
+    public override void Execute()
     {
-        
+        moveSpeedCoef = 0.8f;
+
+        agent.speed = moveSpeed * moveSpeedCoef;
+
+        Debug.Log("Entered Hit state");
+
+        Transform bestTarget = FindClosestTarget();
+
+        agent.destination = bestTarget.position;
     }
 
-    private Transform FindClosestTarget(EnemyStateManager state)
+    private Transform FindClosestTarget()
     {
         Transform bestTarget = null;
         {
-            Vector3 currentposition = state.Agent.transform.position;
+            Vector3 currentposition = agent.transform.position;
             float closestDistance = float.MaxValue;
 
-            foreach (GameObject obj in state.Targets)
+            foreach (GameObject obj in targets)
             {
                 Vector3 differenceToTarget = obj.transform.position - currentposition;
                 float distance = differenceToTarget.sqrMagnitude;

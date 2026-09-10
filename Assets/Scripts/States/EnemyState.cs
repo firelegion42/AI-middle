@@ -1,16 +1,24 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class EnemyState
+public abstract class EnemyState: MonoBehaviour, IBehaviour
 {
+
+    [SerializeField] protected EnemyHealth _health;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected NavMeshAgent agent;     
+    protected StateManager stateManager;
     protected float moveSpeedCoef;
 
-    public abstract void EnterState(EnemyStateManager state);
 
-    public abstract void UpdateState(EnemyStateManager state);
+    public void Init(StateManager state)
+    {
+        stateManager = state;
+    }
 
-    public abstract void OnHealthChanged(EnemyStateManager state, float health);
-        
+    public abstract float Evaluate();
 
 
+    public abstract void Execute();
+  
 }

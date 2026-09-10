@@ -1,23 +1,32 @@
 using UnityEngine;
 
-public class EnemyInjuredState : MonoBehaviour
+public class EnemyInjuredState : EnemyState
 {
-    private float moveSpeedCoef;
+    [SerializeField] GameObject[] hideTargets;
+    [SerializeField] protected float injuredThreshold;
 
-    private void EnterState(EnemyStateManager state)
+    public override float Evaluate()
+    {
+        if(_health.HealthPercent <= injuredThreshold)
+        {
+            return 50f;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+    public override void Execute()
     {
         moveSpeedCoef = 0.5f;
 
-        Debug.Log("EnteredInjured");
-    }
+        agent.speed = moveSpeed * moveSpeedCoef;
 
-    private void OnHealthChanged(EnemyStateManager state, float health)
-    {
-        
-    }
+        int currentzone = Random.Range(0, hideTargets.Length);
 
-    private void UpdateState(EnemyStateManager state)
-    {
-        
+        agent.destination = hideTargets[currentzone].transform.position;
+
+        Debug.Log("Entered Injured");
     }
 }
