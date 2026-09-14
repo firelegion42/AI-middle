@@ -3,15 +3,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-public class StateManager : MonoBehaviour
+public class BehaviourManager : MonoBehaviour
 {
-    private EnemyState _activeBehaviour;
+    private EnemyBehaviour _activeBehaviour;
 
-    [SerializeField] private List<EnemyState> _behaviours;
+    [SerializeField] private List<EnemyBehaviour> _behaviours;
 
     private void Awake()
     {
-        _behaviours = new List<EnemyState>(GetComponents<EnemyState>());
+        _behaviours = new List<EnemyBehaviour>(GetComponents<EnemyBehaviour>());
 
         foreach (var behaviour in _behaviours)
         {
@@ -24,7 +24,7 @@ public class StateManager : MonoBehaviour
         DecideAction();
     }
 
-    public void OnHealthChange(float currentHealth)
+    private void Update()
     {
         DecideAction();
     }
@@ -32,14 +32,13 @@ public class StateManager : MonoBehaviour
     public void DecideAction()
     {
         float maxUtility = 0;
-        EnemyState targetBehaviour = null;
+        EnemyBehaviour targetBehaviour = null;
 
         foreach (var behaviour in _behaviours)
         {
             var utility = behaviour.Evaluate();
             if (maxUtility < utility)
             {
-                Debug.Log(behaviour.name);
                 maxUtility = utility;
                 targetBehaviour = behaviour;
             }
