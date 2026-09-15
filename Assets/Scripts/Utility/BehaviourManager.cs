@@ -9,7 +9,8 @@ public class BehaviourManager : MonoBehaviour
 
     [SerializeField] private List<EnemyBehaviour> _behaviours;
 
-    private void Awake()
+
+    private void Start()
     {
         _behaviours = new List<EnemyBehaviour>(GetComponents<EnemyBehaviour>());
 
@@ -17,10 +18,6 @@ public class BehaviourManager : MonoBehaviour
         {
             behaviour.Init(this);
         }
-    }
-
-    private void Start()
-    {
         DecideAction();
     }
 
