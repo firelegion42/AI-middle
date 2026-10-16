@@ -5,6 +5,8 @@ public class EnemyInjuredState : EnemyState
     [SerializeField] GameObject[] hideTargets;
     [SerializeField] protected float injuredThreshold;
 
+    [SerializeField] protected Animator animator;
+
     public override float Evaluate()
     {
         if(_health.HealthPercent <= injuredThreshold)
@@ -19,6 +21,8 @@ public class EnemyInjuredState : EnemyState
 
     public override void Execute()
     {
+        animator.SetTrigger("Injured");
+
         moveSpeedCoef = 0.5f;
 
         agent.speed = moveSpeed * moveSpeedCoef;

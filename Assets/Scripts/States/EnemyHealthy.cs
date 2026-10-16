@@ -5,6 +5,8 @@ public class EnemyHealthyState : EnemyState
 {
     [SerializeField] protected GameObject[] targets;
 
+    [SerializeField] protected Animator animator;
+
     public override float Evaluate()
     {
         return 1f;
@@ -13,6 +15,8 @@ public class EnemyHealthyState : EnemyState
     public override void Execute()
     {
         Debug.Log("Entered Healthy");
+
+        animator.SetTrigger("Healthy");
 
         moveSpeedCoef = 1;
 
