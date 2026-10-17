@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Settings", menuName = "Scriptable Objects/Settings")]
-public class Settings : ScriptableObject
+[CreateAssetMenu(fileName = "Settings", menuName = "Scriptable Objects/EnemySettings")]
+public class EnemySettings : ScriptableObject
 {
     [SerializeField] private float _enemyMaxHealth;
 
