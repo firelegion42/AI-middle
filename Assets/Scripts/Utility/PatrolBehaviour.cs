@@ -29,8 +29,6 @@ public class PatrolBehaviour : EnemyBehaviour
     {
         moveSpeedCoef = 0.8f;
 
-        animator.SetBool("IsRunning", true);
-
         agent.speed = moveSpeed * moveSpeedCoef;
 
         Debug.Log("Entered Patrol");
@@ -43,13 +41,11 @@ public class PatrolBehaviour : EnemyBehaviour
 
         if(distance <= distanceToTarget)
         {
-            animator.SetBool("IsRunning", false);
-            animator.SetBool("LookingAround", true);
+            animator.SetInteger("CurrentState", 1);
         }
         else
         {
-            animator.SetBool("IsRunning", true);
-            animator.SetBool("LookingAround", false);
+            animator.SetInteger("CurrentState", 0);
         }
         
 

@@ -43,5 +43,10 @@ public class BehaviourManager : MonoBehaviour
         _activeBehaviour = targetBehaviour;
         _activeBehaviour.Execute();
     }
+
+    public void HandleDeath()
+    {
+
+    }
 }
 
