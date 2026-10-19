@@ -8,6 +8,8 @@ public abstract class EnemyBehaviour: MonoBehaviour, IBehaviour
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected Transform _player;
     [SerializeField] protected float _radius;
+    [SerializeField] protected Animator animator;
+    
     protected BehaviourManager behaviourManager;
     
     protected float moveSpeedCoef;

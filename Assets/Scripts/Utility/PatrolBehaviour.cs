@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Assemblies;
 using static UnityEngine.GraphicsBuffer;
 
 public class PatrolBehaviour : EnemyBehaviour
 {
 
     [SerializeField] protected GameObject[] targets;
+
+    [SerializeField] private float distanceToTarget;
 
 
     public override float Evaluate()
@@ -26,6 +29,8 @@ public class PatrolBehaviour : EnemyBehaviour
     {
         moveSpeedCoef = 0.8f;
 
+        animator.SetBool("IsRunning", true);
+
         agent.speed = moveSpeed * moveSpeedCoef;
 
         Debug.Log("Entered Patrol");
@@ -33,6 +38,20 @@ public class PatrolBehaviour : EnemyBehaviour
         Transform bestTarget = FindClosestTarget();
 
         agent.destination = bestTarget.position;
+
+        float distance = Vector3.Distance(transform.position, bestTarget.position);
+
+        if(distance <= distanceToTarget)
+        {
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("LookingAround", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", true);
+            animator.SetBool("LookingAround", false);
+        }
+        
 
 
     }
@@ -54,6 +73,12 @@ public class PatrolBehaviour : EnemyBehaviour
                     closestDistance = distance;
                     bestTarget = obj.transform;
                     Debug.Log("Found Closest Target");
+                }
+
+                else if (distance < distanceToTarget)
+                {
+                    animator.SetBool("IsRunning", false);
+                    animator.SetBool("LookingAround", true);
                 }
             }
 
