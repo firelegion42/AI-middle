@@ -13,7 +13,7 @@ public class ChaseBehaviour : EnemyBehaviour
 
     public override void Execute()
     {
-        animator.SetInteger("CurrentState", 2);
+        animator.SetFloat("CurrentState", Walk, Run, Time.deltaTime);
 
         moveSpeedCoef = 1f;
 

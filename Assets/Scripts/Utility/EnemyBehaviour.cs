@@ -14,6 +14,12 @@ public abstract class EnemyBehaviour: MonoBehaviour, IBehaviour
     
     protected float moveSpeedCoef;
 
+    protected const float LookAround = 0f;
+
+    protected const float Walk = 0.5f;
+
+    protected const float Run = 1f;
+
 
     public void Init(BehaviourManager behaviour)
     {

@@ -41,11 +41,13 @@ public class PatrolBehaviour : EnemyBehaviour
 
         if(distance <= distanceToTarget)
         {
-            animator.SetInteger("CurrentState", 1);
+            animator.SetFloat ("CurrentState", LookAround, Walk, Time.deltaTime);
+            Debug.Log(animator.GetFloat("CurrentState"));
         }
         else
         {
-            animator.SetInteger("CurrentState", 0);
+            animator.SetFloat("CurrentState", Walk);
+            Debug.Log(animator.GetFloat("CurrentState"));
         }
         
 
