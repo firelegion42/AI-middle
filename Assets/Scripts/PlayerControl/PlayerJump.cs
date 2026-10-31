@@ -6,6 +6,8 @@ public class PlayerJump : MonoBehaviour, IJumpable
     [SerializeField] private int _jumpForce;
     [SerializeField] private LayerMask _groundMask;
 
+    private bool wings;
+
     private Rigidbody rb;
     private bool _isGrounded;
 
@@ -25,5 +27,10 @@ public class PlayerJump : MonoBehaviour, IJumpable
         {
             rb.AddForce(new Vector3(0, _jumpForce, 0));
         }
+    }
+
+    private void DoubleJump()
+    {
+
     }
 }
